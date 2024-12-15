@@ -5,7 +5,7 @@ import { Plus, Minus } from "lucide-react"
 const CustomAccordion = ({ id, expanded, setExpanded, title, content, contentClass }) => {
     const isActive = id === expanded
     return (
-        <article className="border-b border-[#E2E8F0] py-5 last:border-b-0 lg:px-20 lg:py-10">
+        <article className="border-b border-[#E2E8F0] py-5 last:border-b-0 lg:px-14 lg:py-6">
             <div
                 className="mb-4 flex cursor-pointer select-none items-center justify-between"
                 onClick={() => setExpanded(isActive ? false : id)}

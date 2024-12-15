@@ -96,7 +96,7 @@ const SupportPage = () => {
 
     return (
         <div>
-            <h2 className="mr-auto mt-5 max-w-max font-sugar-magic text-3xl leading-tight text-primary-heading lg:text-5xl">
+            <h2 className="mr-auto mb-5 mt-5 max-w-max font-sugar-magic text-3xl leading-tight text-primary-heading lg:text-5xl">
                 Frequently Asked Questions
             </h2>
             <div className="w-full">
