@@ -1,3 +1,4 @@
+import { Toaster } from "sonner"
 import { cookies } from "next/headers"
 //import jwt from "jsonwebtoken"
 import { redirect } from "next/navigation"
@@ -46,7 +47,10 @@ export default async function RootLayout({ children }) {
     // }
     return (
         <html lang="en">
-            <body className={` antialiased`}>{children}</body>
+            <body className={` antialiased`}>
+                <Toaster richColors />
+                {children}
+            </body>
         </html>
     )
 }

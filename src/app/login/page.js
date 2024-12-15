@@ -37,7 +37,7 @@ const LoginPage = () => {
             if (response.ok) {
                 await response.json()
                 toast.success("Login successful")
-                router.push("/dashboard")
+                router.push("/")
             } else {
                 toast.error("Please enter correct credentials")
             }

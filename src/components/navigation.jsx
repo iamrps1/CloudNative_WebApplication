@@ -16,6 +16,7 @@ import {
     X,
 } from "lucide-react"
 import { useRouter } from "next/navigation"
+import { toast } from "sonner"
 
 // Desktop Navigation item component
 const NavItem = ({ icon, text, active = false, onClick }) => {
@@ -73,8 +74,9 @@ const Navigation = () => {
             // Call the logout API
             const response = await fetch("/api/logout", { method: "POST" })
 
-            console.log(response)
+            console.log(await response.json())
             if (response.ok) {
+                toast.success("Logout successful")
                 router.push("/login")
             } else {
                 console.error("Logout failed")

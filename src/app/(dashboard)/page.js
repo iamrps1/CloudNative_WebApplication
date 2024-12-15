@@ -1,9 +1,13 @@
-import { redirect } from "next/navigation"
+import Navigation from "@/components/navigation"
 import React from "react"
 
-const Main = () => {
-    redirect("/dashboard")
-    return <div>Main</div>
+const MainDashboard = () => {
+    return (
+        <div>
+            <Navigation />
+            MainDashboard
+        </div>
+    )
 }
 
-export default Main
+export default MainDashboard
