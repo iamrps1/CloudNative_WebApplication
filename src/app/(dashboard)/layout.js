@@ -4,6 +4,7 @@ import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
 
 import "../globals.css"
+import Navigation from "@/components/navigation"
 
 export const metadata = {
     title: "CopySure - Authentic Check",
@@ -49,7 +50,8 @@ export default async function RootLayout({ children }) {
         <html lang="en">
             <body className={` antialiased`}>
                 <Toaster richColors />
-                {children}
+                <Navigation />
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">{children}</div>
             </body>
         </html>
     )

@@ -2,6 +2,8 @@
 
 import { useState } from "react"
 import Link from "next/link"
+import { toast } from "sonner"
+import { useRouter, usePathname } from "next/navigation"
 import {
     Globe,
     LogOut,
@@ -15,52 +17,26 @@ import {
     Menu,
     X,
 } from "lucide-react"
-import { useRouter } from "next/navigation"
-import { toast } from "sonner"
+import { cn } from "@/lib/utils"
 
 // Desktop Navigation item component
-const NavItem = ({ icon, text, active = false, onClick }) => {
-    return onClick === undefined ? (
-        <Link
-            href="#"
-            className={`flex flex-col items-center px-3 py-2 text-sm hover:bg-slate-800 rounded transition-colors
-          ${active ? "bg-orange-400" : ""}`}
-        >
-            {icon}
-            <span className="mt-1 text-xs">{text}</span>
-        </Link>
-    ) : (
-        <div
-            className={`flex flex-col items-center px-3 py-2 text-sm hover:bg-slate-800 rounded transition-colors
-          ${active ? "bg-orange-400" : ""}`}
-            onClick={onClick}
-        >
-            {icon}
-            <span className="mt-1 text-xs">{text}</span>
-        </div>
+const NavItem = ({ icon, text, active = false, href, onClick, isMobile = false }) => {
+    const linkClasses = cn(
+        "flex flex-col items-center px-3 py-2 text-sm hover:bg-slate-800 rounded transition-colors",
+        active && "bg-orange-400",
+        isMobile && active ? "bg-orange-400" : "hover:bg-slate-800",
+        isMobile && "px-4 py-3 rounded-md text-center justify-center"
     )
-}
 
-// Mobile Navigation item component
-const MobileNavItem = ({ icon, text, active = false, href, onClick }) => {
     return href ? (
-        <Link href={href}>
-            <a
-                className={`flex items-center space-x-3 px-4 py-3 rounded-md transition-colors
-                ${active ? "bg-orange-400" : "hover:bg-slate-800"}`}
-            >
-                {icon}
-                <span className="text-sm">{text}</span>
-            </a>
+        <Link href={href} className={linkClasses}>
+            {icon}
+            <span className={cn(isMobile ? "text-sm" : "mt-1 text-xs")}>{text}</span>
         </Link>
     ) : (
-        <div
-            className={`flex items-center space-x-3 px-4 py-3 rounded-md transition-colors
-                ${active ? "bg-orange-400" : "hover:bg-slate-800"}`}
-            onClick={onClick}
-        >
+        <div className={linkClasses} onClick={onClick}>
             {icon}
-            <span className="text-sm">{text}</span>
+            <span className={cn(isMobile ? "text-sm" : "mt-1 text-xs")}>{text}</span>
         </div>
     )
 }
@@ -68,6 +44,7 @@ const MobileNavItem = ({ icon, text, active = false, href, onClick }) => {
 const Navigation = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
     const router = useRouter()
+    const pathName = usePathname()
 
     const handleLogout = async () => {
         try {
@@ -87,14 +64,14 @@ const Navigation = () => {
     }
 
     const navItems = [
-        { icon: <PenLine size={18} />, text: "New exam" },
-        { icon: <List size={18} />, text: "Exam list", active: true },
-        { icon: <Eye size={18} />, text: "Monitoring / Results" },
-        { icon: <Home size={18} />, text: "My school" },
-        { icon: <User size={18} />, text: "Profile" },
+        { icon: <Home size={18} />, text: "College", href: "/" },
+        { icon: <PenLine size={18} />, text: "Evaluation", href: "/evaluation" },
+        { icon: <List size={18} />, text: "Exam list", href: "/exam-list" },
+        { icon: <Eye size={18} />, text: "Monitoring / Results", href: "/results" },
+        { icon: <User size={18} />, text: "Profile", href: "/profile" },
+        { icon: <Video size={18} />, text: "Training videos", href: "/training" },
+        { icon: <HelpCircle size={18} />, text: "Support", href: "/support" },
         { icon: <LogOut size={18} />, text: "Sign out", onClick: handleLogout },
-        { icon: <Video size={18} />, text: "Training videos" },
-        { icon: <HelpCircle size={18} />, text: "Support" },
     ]
 
     return (
@@ -119,7 +96,8 @@ const Navigation = () => {
                                     key={index}
                                     icon={item.icon}
                                     text={item.text}
-                                    active={item.active}
+                                    href={item.href}
+                                    active={pathName === item.href}
                                     onClick={item.onClick ? item.onClick : undefined}
                                 />
                             ))}
@@ -146,12 +124,14 @@ const Navigation = () => {
                 >
                     <div className="p-4 space-y-4">
                         {navItems.map((item, index) => (
-                            <MobileNavItem
+                            <NavItem
                                 key={index}
                                 icon={item.icon}
                                 text={item.text}
-                                active={item.active}
+                                href={item.href}
+                                active={pathName === item.href}
                                 onClick={item.onClick ? item.onClick : undefined}
+                                isMobile={true}
                             />
                         ))}
                     </div>
