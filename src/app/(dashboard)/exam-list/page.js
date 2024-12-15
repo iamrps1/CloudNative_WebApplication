@@ -1,5 +1,5 @@
 const ExamList = () => {
-    return <div>ExamList</div>
+    return <div>Exam List</div>
 }
 
 export default ExamList
