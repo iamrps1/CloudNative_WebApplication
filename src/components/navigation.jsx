@@ -66,11 +66,11 @@ const Navigation = () => {
                     <div className="flex items-center justify-between h-16">
                         {/* Logo */}
                         <div className="flex items-center">
-                            <a href="/" className="flex items-center">
+                            <Link href="/" className="flex items-center">
                                 <span className="text-2xl font-bold text-white">
                                     CopySure - Authentic Check
                                 </span>
-                            </a>
+                            </Link>
                         </div>
 
                         {/* Desktop Navigation */}

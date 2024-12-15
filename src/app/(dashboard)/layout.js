@@ -1,19 +1,8 @@
 import { cookies } from "next/headers"
-import { Geist, Geist_Mono } from "next/font/google"
 //import jwt from "jsonwebtoken"
 import { redirect } from "next/navigation"
 
 import "../globals.css"
-
-const geistSans = Geist({
-    variable: "--font-geist-sans",
-    subsets: ["latin"],
-})
-
-const geistMono = Geist_Mono({
-    variable: "--font-geist-mono",
-    subsets: ["latin"],
-})
 
 export const metadata = {
     title: "CopySure - Authentic Check",
@@ -25,6 +14,8 @@ export default async function RootLayout({ children }) {
     const email = cookieStore.get("email")
     if (email === undefined || email === null || email === "") {
         redirect("/login")
+    } else {
+        //redirect("/dashboard")
     }
     // const { data: session, status } = useSession()
     // const cookieStore = cookies()
@@ -55,9 +46,7 @@ export default async function RootLayout({ children }) {
     // }
     return (
         <html lang="en">
-            <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-                {children}
-            </body>
+            <body className={` antialiased`}>{children}</body>
         </html>
     )
 }
