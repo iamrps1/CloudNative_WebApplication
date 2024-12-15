@@ -8,14 +8,14 @@ export async function POST(req) {
 
     const { email, password } = formData
 
-    if (email !== "rhvsingh004@gmail.com" || password !== "123") {
-        return new Response(JSON.stringify({ error: "Incorrect username or password" }), {
-            status: 401,
-            headers: {
-                "Content-Type": "application/json",
-            },
-        })
-    }
+    // if (email !== "rhvsingh004@gmail.com" || password !== "123") {
+    //     return new Response(JSON.stringify({ error: "Incorrect username or password" }), {
+    //         status: 401,
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //         },
+    //     })
+    // }
 
     //   const secretKey = process.env.SESSION_SECRET;
 

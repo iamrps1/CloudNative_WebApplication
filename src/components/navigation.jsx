@@ -15,10 +15,11 @@ import {
     Menu,
     X,
 } from "lucide-react"
+import { useRouter } from "next/navigation"
 
 // Desktop Navigation item component
-const NavItem = ({ icon, text, active = false }) => {
-    return (
+const NavItem = ({ icon, text, active = false, onClick }) => {
+    return onClick === undefined ? (
         <Link
             href="#"
             className={`flex flex-col items-center px-3 py-2 text-sm hover:bg-slate-800 rounded transition-colors
@@ -27,25 +28,61 @@ const NavItem = ({ icon, text, active = false }) => {
             {icon}
             <span className="mt-1 text-xs">{text}</span>
         </Link>
+    ) : (
+        <div
+            className={`flex flex-col items-center px-3 py-2 text-sm hover:bg-slate-800 rounded transition-colors
+          ${active ? "bg-orange-400" : ""}`}
+            onClick={onClick}
+        >
+            {icon}
+            <span className="mt-1 text-xs">{text}</span>
+        </div>
     )
 }
 
 // Mobile Navigation item component
-const MobileNavItem = ({ icon, text, active = false }) => {
-    return (
-        <Link
-            href="#"
+const MobileNavItem = ({ icon, text, active = false, href, onClick }) => {
+    return href ? (
+        <Link href={href}>
+            <a
+                className={`flex items-center space-x-3 px-4 py-3 rounded-md transition-colors
+                ${active ? "bg-orange-400" : "hover:bg-slate-800"}`}
+            >
+                {icon}
+                <span className="text-sm">{text}</span>
+            </a>
+        </Link>
+    ) : (
+        <div
             className={`flex items-center space-x-3 px-4 py-3 rounded-md transition-colors
-          ${active ? "bg-orange-400" : "hover:bg-slate-800"}`}
+                ${active ? "bg-orange-400" : "hover:bg-slate-800"}`}
+            onClick={onClick}
         >
             {icon}
             <span className="text-sm">{text}</span>
-        </Link>
+        </div>
     )
 }
 
 const Navigation = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+    const router = useRouter()
+
+    const handleLogout = async () => {
+        try {
+            // Call the logout API
+            const response = await fetch("/api/logout", { method: "POST" })
+
+            console.log(response)
+            if (response.ok) {
+                router.push("/login")
+            } else {
+                console.error("Logout failed")
+            }
+        } catch (error) {
+            console.error("Logout failed", error)
+        }
+    }
 
     const navItems = [
         { icon: <PenLine size={18} />, text: "New exam" },
@@ -53,7 +90,7 @@ const Navigation = () => {
         { icon: <Eye size={18} />, text: "Monitoring / Results" },
         { icon: <Home size={18} />, text: "My school" },
         { icon: <User size={18} />, text: "Profile" },
-        { icon: <LogOut size={18} />, text: "Sign out" },
+        { icon: <LogOut size={18} />, text: "Sign out", onClick: handleLogout },
         { icon: <Video size={18} />, text: "Training videos" },
         { icon: <HelpCircle size={18} />, text: "Support" },
     ]
@@ -81,6 +118,7 @@ const Navigation = () => {
                                     icon={item.icon}
                                     text={item.text}
                                     active={item.active}
+                                    onClick={item.onClick ? item.onClick : undefined}
                                 />
                             ))}
                         </div>
@@ -111,6 +149,7 @@ const Navigation = () => {
                                 icon={item.icon}
                                 text={item.text}
                                 active={item.active}
+                                onClick={item.onClick ? item.onClick : undefined}
                             />
                         ))}
                     </div>
