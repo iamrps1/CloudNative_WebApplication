@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server"
+import { isAuthenticated } from "./lib/user-check"
 
 // This function can be marked `async` if using `await` inside
-export function middleware(request) {
+export async function middleware(request) {
     const { pathname } = request.nextUrl
 
     const publicPaths = ["/login", "/signup", "/forgot-password", "/reset-password"]
@@ -10,8 +11,7 @@ export function middleware(request) {
     const isPublicPath = publicPaths.some((path) => pathname.startsWith(path))
 
     // Get authentication status
-    //   const isAuthed = await isAuthenticated();
-    const isAuthed = true
+    const isAuthed = await isAuthenticated()
 
     // Redirect logic
     if (!isAuthed && !isPublicPath) {

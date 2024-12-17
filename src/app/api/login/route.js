@@ -3,7 +3,7 @@ import { ROLES } from "@/constants"
 
 import { cookies } from "next/headers"
 
-export async function create(data) {}
+//export async function create(data) {}
 export async function POST(req) {
     const formData = await req.json()
 
@@ -37,7 +37,7 @@ export async function POST(req) {
 
     cookieStore.set("email", email)
     cookieStore.set("password", password)
-    // cookieStore.set("role", ROLES.ADMIN)
+    cookieStore.set("role", ROLES.ADMIN)
 
     return new Response(JSON.stringify({ message: "Login successful" }), {
         headers: {

@@ -37,3 +37,28 @@ export async function createSession(userId) {
         path: "/",
     })
 }
+
+export async function deleteCookies(response, cookieName) {
+    if (Array.isArray(cookieName)) {
+        cookieName.forEach((name) => {
+            response.cookies.set(name, "", {
+                maxAge: 0,
+                path: "/",
+            })
+        })
+    } else {
+        response.cookies.set(cookieName, "", {
+            maxAge: 0,
+            path: "/",
+        })
+    }
+
+    //For more secure connection
+    // cookieStore.set("session", "", {
+    //     maxAge: 0,
+    //     httpOnly: true,
+    //     secure: true,
+    //     sameSite: "lax",
+    //     path: "/",
+    // })
+}
