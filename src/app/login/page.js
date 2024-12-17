@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-import { toast } from "sonner"
+//import { toast } from "sonner"
 //import Link from "next/link"
 
 const LoginPage = () => {
@@ -36,13 +36,13 @@ const LoginPage = () => {
             })
             if (response.ok) {
                 await response.json()
-                toast.success("Login successful")
+                //toast.success("Login successful")
                 router.push("/")
             } else {
-                toast.error("Please enter correct credentials")
+                //toast.error("Please enter correct credentials")
             }
         } catch (error) {
-            toast.error("Failed to submit:", error)
+            //toast.error("Failed to submit:", error)
         }
     }
 

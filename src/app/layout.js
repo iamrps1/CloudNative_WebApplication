@@ -1,5 +1,4 @@
-import "../globals.css"
-import { Toaster } from "sonner"
+import "./globals.css"
 
 export const metadata = {
     title: "CopySure - Authentic Check",
@@ -9,10 +8,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
     return (
         <html lang="en">
-            <body className={`antialiased`}>
-                <Toaster richColors />
-                {children}
-            </body>
+            <body className={`antialiased`}>{children}</body>
         </html>
     )
 }

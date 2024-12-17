@@ -12,13 +12,14 @@ export const metadata = {
 }
 
 export default async function RootLayout({ children }) {
-    const cookieStore = await cookies()
-    const email = cookieStore.get("email")
-    if (email === undefined || email === null || email === "") {
-        redirect("/login")
-    } else {
-        //redirect("/dashboard")
-    }
+    // const cookieStore = await cookies()
+    // const email = cookieStore.get("email")
+    // console.log(email)
+    // if (email === undefined || email === null || email === "") {
+    //     //redirect("/login")
+    // } else {
+    //     //redirect("/dashboard")
+    // }
     // const { data: session, status } = useSession()
     // const cookieStore = cookies()
 
@@ -46,13 +47,20 @@ export default async function RootLayout({ children }) {
     // } catch (error) {
     //     redirect("/login")
     // }
+    // return (
+    //     <html lang="en">
+    //         <body className={`antialiased`}>
+    //             <Toaster richColors />
+    //             <Navigation />
+    //             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">{children}</div>
+    //         </body>
+    //     </html>
+    // )
+
     return (
-        <html lang="en">
-            <body className={` antialiased`}>
-                <Toaster richColors />
-                <Navigation />
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">{children}</div>
-            </body>
-        </html>
+        <>
+            <Navigation />
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">{children}</div>
+        </>
     )
 }
