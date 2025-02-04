@@ -64,13 +64,11 @@ const Navigation = () => {
     }
 
     const navItems = [
-        { icon: <Home size={18} />, text: "College", href: "/" },
-        { icon: <PenLine size={18} />, text: "Evaluation", href: "/evaluation" },
-        { icon: <List size={18} />, text: "Exam list", href: "/exam-list" },
-        { icon: <Eye size={18} />, text: "Monitoring / Results", href: "/results" },
-        { icon: <User size={18} />, text: "Profile", href: "/profile" },
-        { icon: <Video size={18} />, text: "Training videos", href: "/training" },
-        { icon: <HelpCircle size={18} />, text: "Support", href: "/support" },
+        { icon: <PenLine size={18} />, text: "Evaluation" },
+        { icon: <List size={18} />, text: "Exam list", active: true },
+        { icon: <Eye size={18} />, text: "Monitoring / Results" },
+        { icon: <Home size={18} />, text: "College" },
+        { icon: <User size={18} />, text: "Profile" },
         { icon: <LogOut size={18} />, text: "Sign out", onClick: handleLogout },
     ]
 
