@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import { isAuthenticated } from "./lib/user-check"
+import { getToken } from "next-auth/jwt"
 
 // This function can be marked `async` if using `await` inside
 export async function middleware(request) {
@@ -10,8 +10,10 @@ export async function middleware(request) {
     // Check if the path is public
     const isPublicPath = publicPaths.some((path) => pathname.startsWith(path))
 
-    // Get authentication status
-    const isAuthed = await isAuthenticated()
+    // Get authentication token from NextAuth
+    const token = await getToken({ req: request, secret: process.env.NEXT_AUTH_SECRET })
+
+    const isAuthed = !!token
 
     // Redirect logic
     if (!isAuthed && !isPublicPath) {

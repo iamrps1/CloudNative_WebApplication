@@ -2,16 +2,20 @@
 
 import { useState } from "react"
 import Link from "next/link"
+import { useSession, signOut } from "next-auth/react"
 import { toast } from "sonner"
 import { useRouter, usePathname } from "next/navigation"
 import { Globe, LogOut, Home, List, PenLine, Eye, User, Menu, X } from "lucide-react"
 import { cn } from "@/lib/utils"
+
+import config from "../../config"
 
 // Desktop Navigation item component
 const NavItem = ({ icon, text, active = false, href, onClick, isMobile = false }) => {
     const linkClasses = cn(
         "flex flex-col items-center px-3 py-2 text-sm hover:bg-slate-800 rounded transition-colors",
         active && "bg-orange-400",
+        onClick && "cursor-pointer",
         isMobile && active ? "bg-orange-400" : "hover:bg-slate-800",
         isMobile && "px-4 py-3 rounded-md text-center justify-center"
     )
@@ -33,32 +37,37 @@ const Navigation = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
     const router = useRouter()
     const pathName = usePathname()
+    const { data: session } = useSession()
+
+    if (!session) {
+        return <p>Loading...</p>
+    }
+
+    const { role } = session.user
 
     const handleLogout = async () => {
         try {
-            // Call the logout API
-            const response = await fetch("/api/logout", { method: "POST" })
-
-            console.log(await response.json())
-            if (response.ok) {
-                toast.success("Logout successful")
-                router.push("/login")
-            } else {
-                console.error("Logout failed")
-            }
+            signOut({ callbackUrl: "/login" })
         } catch (error) {
             console.error("Logout failed", error)
         }
     }
 
-    const navItems = [
-        { icon: <PenLine size={18} />, text: "Evaluation", href: "/evaluation" },
-        { icon: <List size={18} />, text: "Exam list", href: "/exams-list" },
-        { icon: <Eye size={18} />, text: "Monitoring / Results", href: "/results" },
-        { icon: <Home size={18} />, text: "College", href: "/support" },
-        { icon: <User size={18} />, text: "Profile", href: "/profile" },
-        { icon: <LogOut size={18} />, text: "Sign out", onClick: handleLogout },
-    ]
+    const navItems =
+        role === "admin"
+            ? [
+                  { icon: <PenLine size={18} />, text: "Evaluation", href: "/evaluation" },
+                  { icon: <List size={18} />, text: "Exam list", href: "/exams-list" },
+                  { icon: <Eye size={18} />, text: "Monitoring ", href: "/results" },
+                  { icon: <Home size={18} />, text: "College", href: "/support" },
+                  { icon: <User size={18} />, text: "Profile", href: "/profile" },
+                  { icon: <LogOut size={18} />, text: "Sign out", onClick: handleLogout },
+              ]
+            : [
+                  { icon: <PenLine size={18} />, text: "Evaluation", href: "/evaluation" },
+                  { icon: <User size={18} />, text: "Profile", href: "/profile" },
+                  { icon: <LogOut size={18} />, text: "Sign out", onClick: handleLogout },
+              ]
 
     return (
         <div className="w-full">
@@ -69,7 +78,7 @@ const Navigation = () => {
                         {/* Logo */}
                         <div className="flex items-center">
                             <Link href="/" className="flex items-center">
-                                <span className="text-2xl font-bold text-white">CopySure - Authentic Check</span>
+                                <span className="text-2xl font-bold text-white">{config.siteName}</span>
                             </Link>
                         </div>
 
