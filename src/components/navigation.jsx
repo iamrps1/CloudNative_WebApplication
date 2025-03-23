@@ -4,19 +4,7 @@ import { useState } from "react"
 import Link from "next/link"
 import { toast } from "sonner"
 import { useRouter, usePathname } from "next/navigation"
-import {
-    Globe,
-    LogOut,
-    HelpCircle,
-    Video,
-    Home,
-    List,
-    PenLine,
-    Eye,
-    User,
-    Menu,
-    X,
-} from "lucide-react"
+import { Globe, LogOut, Home, List, PenLine, Eye, User, Menu, X } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 // Desktop Navigation item component
@@ -64,11 +52,11 @@ const Navigation = () => {
     }
 
     const navItems = [
-        { icon: <PenLine size={18} />, text: "Evaluation" },
-        { icon: <List size={18} />, text: "Exam list", active: true },
-        { icon: <Eye size={18} />, text: "Monitoring / Results" },
-        { icon: <Home size={18} />, text: "College" },
-        { icon: <User size={18} />, text: "Profile" },
+        { icon: <PenLine size={18} />, text: "Evaluation", href: "/evaluation" },
+        { icon: <List size={18} />, text: "Exam list", href: "/exams-list" },
+        { icon: <Eye size={18} />, text: "Monitoring / Results", href: "/results" },
+        { icon: <Home size={18} />, text: "College", href: "/support" },
+        { icon: <User size={18} />, text: "Profile", href: "/profile" },
         { icon: <LogOut size={18} />, text: "Sign out", onClick: handleLogout },
     ]
 
@@ -81,9 +69,7 @@ const Navigation = () => {
                         {/* Logo */}
                         <div className="flex items-center">
                             <Link href="/" className="flex items-center">
-                                <span className="text-2xl font-bold text-white">
-                                    CopySure - Authentic Check
-                                </span>
+                                <span className="text-2xl font-bold text-white">CopySure - Authentic Check</span>
                             </Link>
                         </div>
 
