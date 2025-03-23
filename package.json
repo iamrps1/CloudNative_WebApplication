@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@radix-ui/react-checkbox": "^1.1.4",
+    "@radix-ui/react-dropdown-menu": "^2.1.6",
     "@radix-ui/react-slot": "^1.1.2",
     "@tanstack/react-table": "^8.21.2",
     "class-variance-authority": "^0.7.1",
@@ -21,7 +23,8 @@
     "react-dom": "^19.0.0",
     "react-player": "^2.16.0",
     "sonner": "^1.7.1",
-    "tailwind-merge": "^2.5.5"
+    "tailwind-merge": "^2.6.0",
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

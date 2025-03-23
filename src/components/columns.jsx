@@ -1,6 +1,5 @@
-import { ColumnDef } from '@tanstack/react-table';
-import { Exam } from './types';
-import { Badge } from '@/components/ui/badge';
+'use client'
+
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { 
@@ -20,7 +19,6 @@ import {
   DropdownMenuTrigger 
 } from '@/components/ui/dropdown-menu';
 
-// We'll use any to make it more JSX-friendly while satisfying TypeScript
 export const examColumns = [
   {
     id: 'select',
@@ -32,7 +30,7 @@ export const examColumns = [
         }
         onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
         aria-label="Select all"
-        className="translate-y-[2px]"
+        className="translate-y-[2px] bg-slate-200"
       />
     ),
     cell: ({ row }) => (
@@ -40,7 +38,7 @@ export const examColumns = [
         checked={row.getIsSelected()}
         onCheckedChange={(value) => row.toggleSelected(!!value)}
         aria-label="Select row"
-        className="translate-y-[2px]"
+        className="translate-y-[2px] bg-slate-200"
       />
     ),
     enableSorting: false,
@@ -50,14 +48,14 @@ export const examColumns = [
     accessorKey: 'name',
     header: 'Exam name',
     cell: ({ row }) => (
-      <div className="text-left font-medium">{row.getValue('name')}</div>
+      <div className="text-left font-medium text-slate-600">{row.getValue('name')}</div>
     ),
   },
   {
     accessorKey: 'key',
     header: 'Exam key',
     cell: ({ row }) => (
-      <div className="text-left font-medium opacity-50">{row.getValue('key')}</div>
+      <div className="text-left font-medium text-slate-600">{row.getValue('key')}</div>
     ),
   },
   {
@@ -69,7 +67,7 @@ export const examColumns = [
       </div>
     ),
     cell: ({ row }) => (
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 text-slate-600">
         <Calendar className="h-4 w-4 text-muted-foreground" />
         <span>{row.getValue('created')}</span>
       </div>
@@ -111,7 +109,7 @@ export const examColumns = [
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className={`status-indicator ${
+            <Button variant="ghost" className={`status-indicator text-black ${
               status === 'closed' ? 'status-closed' : 
               status === 'open' ? 'status-open' : 'status-partial'
             }`}>
@@ -150,26 +148,26 @@ export const examColumns = [
       return (
         <div className="flex items-center justify-end space-x-2">
           {exam.actions.canEdit && (
-            <Button variant="ghost" size="icon" className="rounded-full hover:bg-slate-100" title="Edit exam">
+            <Button variant="ghost" size="icon" className="rounded-full text-black hover:text-black hover:bg-slate-100" title="Edit exam">
               <PencilLine className="h-4 w-4" />
             </Button>
           )}
           
           {exam.actions.canView && (
-            <Button variant="ghost" size="icon" className="rounded-full hover:bg-slate-100" title="View exam">
+            <Button variant="ghost" size="icon" className="rounded-full text-black hover:text-black hover:bg-slate-100" title="View exam">
               <Eye className="h-4 w-4" />
             </Button>
           )}
           
           {exam.actions.canMonitor && (
-            <Button variant="ghost" size="icon" className="rounded-full hover:bg-slate-100" title="Monitor exam">
+            <Button variant="ghost" size="icon" className="rounded-full text-black hover:text-black hover:bg-slate-100" title="Monitor exam">
               <Users className="h-4 w-4" />
             </Button>
           )}
           
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon" className="rounded-full hover:bg-slate-100">
+              <Button variant="ghost" size="icon" className="rounded-full text-black hover:text-black hover:bg-slate-100">
                 <MoreVertical className="h-4 w-4" />
                 <span className="sr-only">More options</span>
               </Button>

@@ -1,15 +1,12 @@
 'use client'
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import {
-  ColumnDef,
   flexRender,
   getCoreRowModel,
   useReactTable,
   getPaginationRowModel,
   getSortedRowModel,
-  SortingState,
-  ColumnFiltersState,
   getFilteredRowModel,
 } from '@tanstack/react-table';
 
@@ -31,13 +28,12 @@ import {
   Search
 } from 'lucide-react';
 
-
 export function DataTable({
   columns,
   data,
 }) {
-  const [sorting, setSorting] = useState<SortingState>([]);
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const [sorting, setSorting] = useState([]);
+  const [columnFilters, setColumnFilters] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
 
   const table = useReactTable({
