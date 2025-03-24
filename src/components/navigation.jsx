@@ -3,8 +3,7 @@
 import { useState } from "react"
 import Link from "next/link"
 import { useSession, signOut } from "next-auth/react"
-import { toast } from "sonner"
-import { useRouter, usePathname } from "next/navigation"
+import { usePathname } from "next/navigation"
 import { Globe, LogOut, Home, List, PenLine, Eye, User, Menu, X } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -35,7 +34,7 @@ const NavItem = ({ icon, text, active = false, href, onClick, isMobile = false }
 
 const Navigation = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-    const router = useRouter()
+
     const pathName = usePathname()
     const { data: session } = useSession()
 
@@ -45,7 +44,7 @@ const Navigation = () => {
 
     const { role } = session.user
 
-    const handleLogout = async () => {
+    const handleLogout = () => {
         try {
             signOut({ callbackUrl: "/login" })
         } catch (error) {
