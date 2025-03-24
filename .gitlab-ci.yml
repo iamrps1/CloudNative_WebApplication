@@ -1,0 +1,60 @@
+stages:
+  - build
+  - test
+  - security
+  - deploy
+
+variables:
+  AWS_REGION: "ap-south-1"  # AWS Region
+  ECR_REPO: "cloudnative_ecr"
+  ECS_CLUSTER: "project_cloudnative"
+  ECS_SERVICE: "project"
+  TASK_DEFINITION: "native.json"
+
+before_script:
+  - apt-get update -y && apt-get install -y awscli jq docker.io
+
+# 🏗️ Build Stage: Docker Image Create aur AWS ECR pe Push karo
+build:
+  stage: build
+  script:
+    - echo "Logging into AWS ECR..."
+    - aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin 831926582102.dkr.ecr.$AWS_REGION.amazonaws.com
+    - echo "Building Docker Image..."
+    - docker build -t $ECR_REPO .
+    - echo "Tagging Docker Image..."
+    - docker tag $ECR_REPO:latest 831926582102.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPO:latest
+    - echo "Pushing Docker Image to AWS ECR..."
+    - docker push 831926582102.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPO:latest
+  only:
+    - main
+
+# ✅ Test Stage: Application Tests Run Karo
+test:
+  stage: test
+  script:
+    - echo "Running Unit Tests..."
+    - npm install
+    - npm test
+  only:
+    - main
+
+# 🔒 Security Stage: SonarQube + Snyk ke saath Scanning Karo
+security:
+  stage: security
+  script:
+    - echo "Running SonarQube Analysis..."
+    - sonar-scanner -Dsonar.projectKey=my-project -Dsonar.host.url=http://your-sonarqube-server -Dsonar.login=$SONARQUBE_TOKEN
+    - echo "Running Snyk Security Check..."
+    - snyk test --severity-threshold=high
+  only:
+    - main
+
+# 🚀 Deploy Stage: ECS Cluster Update Karo
+deploy:
+  stage: deploy
+  script:
+    - echo "Updating ECS Task Definition..."
+    - aws ecs update-service --cluster $ECS_CLUSTER --service $ECS_SERVICE --force-new-deployment
+  only:
+    - main
