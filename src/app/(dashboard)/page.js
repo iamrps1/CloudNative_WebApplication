@@ -1,6 +1,7 @@
 import { DashboardCard } from "@/components/ui/cards"
 import { cn } from "@/lib/utils"
 import { Home, Info, Mail, User } from "lucide-react"
+import config from "../../../config"
 
 const links = [
     {
@@ -44,7 +45,7 @@ const links = [
 const MainDashboard = () => {
     return (
         <div>
-            <h1 className="text-3xl font-bold my-5">Welcome to the CopySure - Authentic Checker</h1>
+            <h1 className="text-3xl font-bold my-5">Welcome to the {config.siteName}</h1>
 
             <div className="my-5 grid grid-cols-3 gap-6">
                 {links.map((link) => (

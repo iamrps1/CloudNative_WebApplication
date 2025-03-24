@@ -1,14 +1,19 @@
-import { cookies } from "next/headers"
+"use client"
 
-const ProfilePage = async () => {
-    const cookieStore = await cookies()
+import { useSession } from "next-auth/react"
 
-    const email = cookieStore.get("email")
-
+const ProfilePage = () => {
+    const { data: session, status } = useSession()
+    if (status === "loading") {
+        return <div>Loading...</div>
+    }
     return (
         <div>
             Profile Page
-            <div className="my-5">Email: {email.value}</div>
+            <div>
+                <h1>{session?.user?.email}</h1>
+            </div>
+            <div className="my-5">Edit Name, email id, reset password and much more in near future</div>
         </div>
     )
 }
