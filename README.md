@@ -2,6 +2,11 @@
 
 SmartGrades is a cloud based platform designed for secure development and deployment of the software.It contains an automated CI/CD pipeline that integrates the continuous security scanning with Sonarqube and Synk.
 
+## Project Content
+This project is divided into two layers:
+* **Application Layer**: It contains both Frontend components(HTML/CSS/JavaScript/React) and Backend component(Nextjs). They are used to make the server for the project and storing the database in it securely.
+* **Cloud Infrastructure and Deployment Layer**: it contains all the infrastructure and deployment tools for storing data securely, solving security issues and automation for the security. And Route 53 DNS for using the local user name for the website. 
+
 # Technology Used
 * **Frontend(HTML/CSS/JavaScript/React)** : Creates the applications UI.
 * **Backend(Next.js)**: It processes the grading logic and connects the databases, nextjs allows to create the server side api endpoints and also used for SSR(Server Side Rendering).
