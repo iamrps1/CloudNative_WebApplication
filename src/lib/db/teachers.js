@@ -14,6 +14,25 @@ export async function upsertTeacher({ id, email, name, subjects, status = "activ
         hashedPassword = await bcrypt.hash(password, 10)
     }
 
+    // If updating an existing teacher, get their current data first
+    let existingTeacher = null
+    if (id) {
+        try {
+            const params = {
+                TableName: TABLES.TEACHERS,
+                Key: {
+                    id: teacherId,
+                },
+            }
+            const response = await dynamoDb.send(new GetCommand(params))
+            if (response.Item) {
+                existingTeacher = response.Item
+            }
+        } catch (error) {
+            console.error("Error fetching existing teacher:", error)
+        }
+    }
+
     const params = {
         TableName: TABLES.TEACHERS,
         Item: {
@@ -23,9 +42,10 @@ export async function upsertTeacher({ id, email, name, subjects, status = "activ
             subjects: Array.isArray(subjects) ? subjects : [subjects],
             status,
             role: "teacher", // Set default role as teacher
-            createdAt: timestamp,
+            createdAt: existingTeacher?.createdAt || timestamp,
             updatedAt: timestamp,
-            ...(hashedPassword && { password: hashedPassword }), // Only include password if it was provided
+            // Preserve existing password if no new password is provided
+            password: hashedPassword || existingTeacher?.password,
         },
     }
 
