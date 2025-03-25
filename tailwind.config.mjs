@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-export default {
+const config = {
     darkMode: ["class"],
     content: [
         "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -14,6 +14,10 @@ export default {
                 primary: {
                     DEFAULT: "hsl(var(--primary))",
                     foreground: "hsl(var(--primary-foreground))",
+                },
+                accent: {
+                    DEFAULT: "#fb923c",
+                    foreground: "hsl(var(--accent-foreground))",
                 },
                 card: {
                     DEFAULT: "hsl(var(--card))",
@@ -30,10 +34,6 @@ export default {
                 muted: {
                     DEFAULT: "hsl(var(--muted))",
                     foreground: "hsl(var(--muted-foreground))",
-                },
-                accent: {
-                    DEFAULT: "hsl(var(--accent))",
-                    foreground: "hsl(var(--accent-foreground))",
                 },
                 destructive: {
                     DEFAULT: "hsl(var(--destructive))",
@@ -59,3 +59,5 @@ export default {
     },
     plugins: [require("tailwindcss-animate")],
 }
+
+export default config

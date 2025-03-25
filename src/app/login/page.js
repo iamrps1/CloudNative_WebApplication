@@ -34,7 +34,7 @@ const LoginPage = () => {
             if (!result?.ok) {
                 // console.error("Login Failed: ", result?.error)
                 toast.error("Please enter correct credentials", {
-                    className: "border-orange-500 bg-orange-500",
+                    className: "border-accent bg-accent",
                 })
             }
             router.push("/")
@@ -49,21 +49,21 @@ const LoginPage = () => {
             <Toaster />
             <section className="bg-gray-900">
                 <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-                    <div className="w-full  rounded-lg shadow border md:mt-0 sm:max-w-md xl:p-0 bg-gray-800 border-orange-500">
+                    <div className="w-full  rounded-lg shadow border md:mt-0 sm:max-w-md xl:p-0 bg-gray-800 border-accent">
                         <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-                            <h1 className="text-xl font-bold leading-tight tracking-tight  md:text-2xl text-orange-500">
+                            <h1 className="text-xl font-bold leading-tight tracking-tight  md:text-2xl text-accent">
                                 Sign in to your account
                             </h1>
                             <form className="space-y-4 md:space-y-6" action="#" onSubmit={handleSubmit}>
                                 <div>
-                                    <label htmlFor="email" className="block mb-2 text-sm font-medium text-orange-500">
+                                    <label htmlFor="email" className="block mb-2 text-sm font-medium text-accent">
                                         Your email
                                     </label>
                                     <input
                                         type="email"
                                         name="email"
                                         id="email"
-                                        className="border outline-none focus:border-orange-500 rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-orange-500 placeholder:opacity-60 text-orange-500"
+                                        className="border outline-none focus:border-accent rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-accent placeholder:opacity-60 text-accent"
                                         placeholder="name@company.com"
                                         value={formFields.email}
                                         onChange={(e) => formFieldHandler("email", e)}
@@ -71,10 +71,7 @@ const LoginPage = () => {
                                     />
                                 </div>
                                 <div>
-                                    <label
-                                        htmlFor="password"
-                                        className="block mb-2 text-sm font-medium text-orange-500"
-                                    >
+                                    <label htmlFor="password" className="block mb-2 text-sm font-medium text-accent">
                                         Password
                                     </label>
                                     <input
@@ -84,7 +81,7 @@ const LoginPage = () => {
                                         placeholder="••••••••"
                                         value={formFields.password}
                                         onChange={(e) => formFieldHandler("password", e)}
-                                        className="border outline-none focus:border-orange-500 rounded-lg  block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-orange-500 placeholder:opacity-60 text-orange-500"
+                                        className="border outline-none focus:border-accent rounded-lg  block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-accent placeholder:opacity-60 text-accent"
                                         required=""
                                     />
                                 </div>
@@ -117,7 +114,7 @@ const LoginPage = () => {
                             </div> */}
                                 <button
                                     type="submit"
-                                    className="w-full text-white focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-orange-500 hover:bg-orange-900  focus:ring-blue-500"
+                                    className="w-full text-white focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-accent hover:bg-accent/80  focus:ring-blue-500"
                                 >
                                     Sign in
                                 </button>

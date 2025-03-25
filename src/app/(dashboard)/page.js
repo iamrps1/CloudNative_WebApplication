@@ -45,7 +45,7 @@ const links = [
 const MainDashboard = () => {
     return (
         <div>
-            <h1 className="text-3xl font-bold my-5">Welcome to the {config.siteName}</h1>
+            <h1 className="text-3xl font-bold my-5">Welcome to the {config.siteName.fullName}</h1>
 
             <div className="my-5 grid grid-cols-3 gap-6">
                 {links.map((link) => (
