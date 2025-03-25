@@ -4,24 +4,23 @@ const SupportPage = () => {
     const accordionData = [
         {
             id: 1,
-            title: "What is CopySure?",
+            title: "What is SmartGrade?",
             content:
-                "CopySure is a platform designed for evaluating written documents or copies. Users can upload PDF files, and designated evaluators such as teachers or checkers can assess the content and provide scores or feedback.",
+                "SmartGrade is a platform designed for evaluating written documents or copies. Users can upload PDF files, and designated evaluators such as teachers or checkers can assess the content and provide scores or feedback.",
         },
         {
             id: 2,
-            title: "How does role-based access work on CopySure?",
+            title: "How does role-based access work on SmartGrade?",
             content: (
                 <>
-                    CopySure operates on a role-based access system:
+                    SmartGrade operates on a role-based access system:
                     <ul className="list-disc ml-5 mt-2">
                         <li>
-                            <strong>Uploaders</strong> can submit their copies in PDF format for
-                            evaluation.
+                            <strong>Uploaders</strong> can submit their copies in PDF format for evaluation.
                         </li>
                         <li>
-                            <strong>Checkers/Teachers</strong> can view uploaded copies, evaluate
-                            them, and assign scores or feedback.
+                            <strong>Checkers/Teachers</strong> can view uploaded copies, evaluate them, and assign
+                            scores or feedback.
                         </li>
                     </ul>
                 </>
@@ -29,15 +28,15 @@ const SupportPage = () => {
         },
         {
             id: 3,
-            title: "Who can use CopySure?",
+            title: "Who can use SmartGrade?",
             content: (
                 <>
-                    CopySure is intended for:
+                    SmartGrade is intended for:
                     <ul className="list-disc ml-5 mt-2">
                         <li>Students or individuals who want their work evaluated.</li>
                         <li>
-                            Teachers, instructors, or designated checkers who will review and
-                            provide feedback on the uploaded files.
+                            Teachers, instructors, or designated checkers who will review and provide feedback on the
+                            uploaded files.
                         </li>
                     </ul>
                 </>
@@ -46,7 +45,7 @@ const SupportPage = () => {
         {
             id: 4,
             title: "What file formats are supported for upload?",
-            content: "Currently, CopySure supports PDF files for upload.",
+            content: "Currently, SmartGrade supports PDF files for upload.",
         },
         {
             id: 5,
@@ -70,19 +69,18 @@ const SupportPage = () => {
         },
         {
             id: 7,
-            title: "Is my data secure on CopySure?",
+            title: "Is my data secure on SmartGrade?",
             content:
-                "Yes, CopySure prioritizes user data security. Uploaded files and evaluations are stored securely and are accessible only to authorized users.",
+                "Yes, SmartGrade prioritizes user data security. Uploaded files and evaluations are stored securely and are accessible only to authorized users.",
         },
         {
             id: 8,
             title: "Can I edit or delete my uploaded files?",
-            content:
-                "Yes, you can edit or delete your uploaded files unless they have already been evaluated.",
+            content: "Yes, you can edit or delete your uploaded files unless they have already been evaluated.",
         },
         {
             id: 9,
-            title: "How do I become a checker or evaluator on CopySure?",
+            title: "How do I become a checker or evaluator on SmartGrade?",
             content:
                 "To become a checker, you need to register and be approved by the admin. Your account will be assigned the appropriate role for evaluating submissions.",
         },

@@ -5,13 +5,6 @@ const loginDetails = [
         password: "adminpass",
         role: "admin",
     },
-    {
-        id: 2,
-        email: "teacher@example.com",
-        password: "teacherpass",
-        role: "teacher",
-        subjects: ["Mathematics", "Physics"], // Example subjects
-    },
 ]
 
 export default loginDetails

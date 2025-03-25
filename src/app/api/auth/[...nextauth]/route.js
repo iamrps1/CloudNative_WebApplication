@@ -1,5 +1,6 @@
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
+import FetchUser from "./login-user-match"
 
 export const authOptions = {
     providers: [
@@ -11,13 +12,7 @@ export const authOptions = {
             },
             async authorize(credentials) {
                 // Replace with real database logic
-                const users = [
-                    { id: 1, email: "admin@example.com", password: "adminpass", role: "admin" },
-                    { id: 2, email: "teacher@example.com", password: "teacherpass", role: "teacher" },
-                ]
-
-                const user = users.find((u) => u.email === credentials.email && u.password === credentials.password)
-
+                const user = await FetchUser(credentials.email, credentials.password)
                 if (user) {
                     return { id: user.id, email: user.email, role: user.role }
                 } else {
@@ -29,11 +24,14 @@ export const authOptions = {
     callbacks: {
         async session({ session, token }) {
             session.user.role = token.role // Attach role to session
+            session.user.id = token.id // Attach id to session
+
             return session
         },
         async jwt({ token, user }) {
             if (user) {
                 token.role = user.role // Save role in token
+                token.id = user.id // Save id in token
             }
             return token
         },
