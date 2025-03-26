@@ -1,8 +1,8 @@
 const config = {
     siteName: {
         firstPart: "Smart",
-        secondPart: "Upload",
-        fullName: "SmartUpload",
+        secondPart: "Grades",
+        fullName: "SmartGrades",
     },
     siteDescription: "SmartGrades is a platform for teachers to manage their classes and students.",
 }
