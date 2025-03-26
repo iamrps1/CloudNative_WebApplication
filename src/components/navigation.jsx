@@ -46,7 +46,8 @@ const Navigation = () => {
 
     const handleLogout = () => {
         try {
-            signOut({ callbackUrl: "/login" })
+            const baseUrl = window.location.origin
+            signOut({ callbackUrl: `${baseUrl}/login` })
         } catch (error) {
             console.error("Logout failed", error)
         }
