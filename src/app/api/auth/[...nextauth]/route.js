@@ -25,7 +25,6 @@ export const authOptions = {
         async session({ session, token }) {
             session.user.role = token.role // Attach role to session
             session.user.id = token.id // Attach id to session
-
             return session
         },
         async jwt({ token, user }) {
@@ -35,6 +34,22 @@ export const authOptions = {
             }
             return token
         },
+        async redirect({ url, baseUrl }) {
+            // Handle relative callback URLs
+            if (url.startsWith("/")) {
+                return `${baseUrl}${url}`
+            }
+            // Handle absolute URLs that match the app's domain
+            else if (new URL(url).origin === baseUrl) {
+                return url
+            }
+            return baseUrl
+        },
+    },
+    pages: {
+        signIn: "/login",
+        signOut: "/login",
+        error: "/login",
     },
     secret: process.env.NEXT_AUTH_SECRET,
     session: {
