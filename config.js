@@ -1,10 +1,13 @@
 const config = {
     siteName: {
-        firstPart: "Smart",
-        secondPart: "Grades",
-        fullName: "SmartGrades",
+        fullName: 'Cloud Native Web Application',
+        shortName: 'CNWA'
     },
-    siteDescription: "SmartGrades is a platform for teachers to manage their classes and students.",
-}
+    siteDescription: 'A cloud-native web application built with Next.js and AWS',
+    aws: {
+        region: process.env.AWS_REGION,
+        s3BucketName: process.env.AWS_S3_BUCKET_NAME
+    }
+};
 
-export default config
+export default config; 

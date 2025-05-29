@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server"
 import { getServerSession } from "next-auth"
-import { authOptions } from "@/lib/auth"
-import { updateTeacherPassword } from "@/lib/db/teachers"
+import { authOptions } from "../../../../../lib/auth"
+import { updateTeacherPassword } from "../../../../../lib/db/teachers"
 
 export async function PUT(request, { params }) {
     try {
