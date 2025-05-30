@@ -2,7 +2,6 @@ import { DynamoDBClient } from "@aws-sdk/client-dynamodb"
 import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb"
 import { S3Client } from "@aws-sdk/client-s3"
 import { PutCommand } from "@aws-sdk/lib-dynamodb"
-import { v4 as uuidv4 } from "uuid"
 
 // AWS Configuration
 const config = {
@@ -41,7 +40,7 @@ export async function saveAssignmentToDynamoDB({
     const documentId = `doc_${Date.now()}`
     const item = {
         PK: `TEACHER#${teacherId}`,
-        SK: `DOC#${uuidv4()}`,
+        SK: `DOC#${documentId}`,
         documentId,
         departmentId,
         subjectId,

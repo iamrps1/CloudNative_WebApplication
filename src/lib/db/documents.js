@@ -90,9 +90,8 @@ export async function getDocument(teacherId, documentId) {
 }
 
 export async function deleteDocument(teacherId, documentId) {
-    console.log("delete", teacherId, documentId)
     // 1. Get the document to find the S3 key
-    // const doc = await getDocument(teacherId, documentId)
+    const doc = await getDocument(teacherId, documentId)
     if (!doc) throw new Error("Document not found")
 
     // 2. Delete from S3
@@ -106,7 +105,7 @@ export async function deleteDocument(teacherId, documentId) {
             )
         } catch (err) {
             console.error("Error deleting from S3:", err)
-            // Optionally, throw or continue
+            // Continue with DynamoDB deletion even if S3 deletion fails
         }
     }
 
@@ -120,7 +119,6 @@ export async function deleteDocument(teacherId, documentId) {
     }
 
     try {
-        console.log("Class")
         await dynamoDb.send(new DeleteCommand(params))
         return true
     } catch (error) {

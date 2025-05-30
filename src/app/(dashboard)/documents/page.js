@@ -77,7 +77,7 @@ export default function DocumentsPage() {
                 // Teacher View
                 <div>
                     <h2 className="text-xl font-semibold mb-4">Your Documents</h2>
-                    <DocumentList documents={documents} loading={loading} />
+                    <DocumentList documents={documents} />
                 </div>
             ) : (
                 <div className="text-center py-8 text-gray-500">You don&apos;t have permission to view this page.</div>

@@ -1,19 +1,17 @@
 "use client"
 
 import { useState } from "react"
-import { FileText, Trash2, Eye } from "lucide-react"
-import { deleteDocument } from "@/lib/db/documents"
+import { FileText, Eye } from "lucide-react"
+
 import { toast } from "sonner"
 import PdfViewer from "./PdfViewer"
 
-export default function DocumentList({ documents, loading, onDocumentDelete }) {
-    const [deletingId, setDeletingId] = useState(null)
+export default function DocumentList({ documents }) {
     const [viewingDoc, setViewingDoc] = useState(null)
     const [loadingUrl, setLoadingUrl] = useState(false)
 
     const handleView = async (document) => {
         try {
-            console.log(document)
             setLoadingUrl(true)
             const response = await fetch(`/api/documents/signed-url?key=${encodeURIComponent(document.s3Key)}`)
             if (!response.ok) {
@@ -27,28 +25,6 @@ export default function DocumentList({ documents, loading, onDocumentDelete }) {
         } finally {
             setLoadingUrl(false)
         }
-    }
-
-    const handleDelete = async (teacherId, documentId) => {
-        try {
-            setDeletingId(documentId)
-            await deleteDocument(teacherId, documentId)
-            toast.success("Document deleted successfully")
-            onDocumentDelete() // Refresh the list
-        } catch (error) {
-            console.error("Error deleting document:", error)
-            toast.error("Failed to delete document")
-        } finally {
-            setDeletingId(null)
-        }
-    }
-
-    if (loading) {
-        return (
-            <div className="flex justify-center items-center h-40">
-                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
-            </div>
-        )
     }
 
     if (!documents?.length) {
@@ -85,14 +61,6 @@ export default function DocumentList({ documents, loading, onDocumentDelete }) {
                                 title="View"
                             >
                                 <Eye className={`h-5 w-5 ${loadingUrl ? "animate-spin" : ""}`} />
-                            </button>
-                            <button
-                                onClick={() => handleDelete(doc.teacherId, doc.documentId)}
-                                className="p-2 text-red-600 hover:bg-red-50 rounded-full transition-colors"
-                                disabled={deletingId === doc.documentId}
-                                title="Delete"
-                            >
-                                <Trash2 className="h-5 w-5" />
                             </button>
                         </div>
                     </div>

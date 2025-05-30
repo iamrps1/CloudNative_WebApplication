@@ -9,13 +9,14 @@ import {
     getPaginationRowModel,
     getSortedRowModel,
 } from "@tanstack/react-table"
-import { ArrowUpDown, Download } from "lucide-react"
+import { ArrowUpDown, Download, Trash2 } from "lucide-react"
 import { toast } from "sonner"
 
 export default function AdminDocumentsPage() {
     const { data: session } = useSession()
     const [documents, setDocuments] = useState([])
     const [loading, setLoading] = useState(true)
+    const [deletingId, setDeletingId] = useState(null)
 
     useEffect(() => {
         if (session?.user?.role === "admin") {
@@ -31,13 +32,34 @@ export default function AdminDocumentsPage() {
                 throw new Error(error || "Failed to load documents")
             }
             const data = await response.json()
-            console.log(data)
             setDocuments(data)
         } catch (error) {
             console.error("Error loading documents:", error)
             toast.error("Failed to load documents")
         } finally {
             setLoading(false)
+        }
+    }
+
+    const handleDelete = async (teacherId, documentId) => {
+        try {
+            setDeletingId(documentId)
+            const res = await fetch("/api/documents/delete", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ teacherId, documentId }),
+            })
+
+            if (!res.ok) {
+                throw new Error("Delete failed")
+            }
+            toast.success("Document deleted successfully")
+            loadAllDocuments() // Reload the documents list
+        } catch (error) {
+            console.error("Error deleting document:", error)
+            toast.error("Failed to delete document")
+        } finally {
+            setDeletingId(null)
         }
     }
 
@@ -89,10 +111,6 @@ export default function AdminDocumentsPage() {
             },
         },
         {
-            accessorKey: "teacherSubjects",
-            header: "Teacher's Subjects",
-        },
-        {
             accessorKey: "uploadDate",
             header: ({ column }) => {
                 return (
@@ -107,6 +125,23 @@ export default function AdminDocumentsPage() {
             },
             cell: ({ row }) => {
                 return new Date(row.original.uploadDate).toLocaleDateString()
+            },
+        },
+        {
+            id: "actions",
+            header: "Actions",
+            cell: ({ row }) => {
+                const document = row.original
+                return (
+                    <button
+                        onClick={() => handleDelete(document.teacherId, document.documentId)}
+                        className="p-2 text-red-600 hover:bg-red-50 rounded-full transition-colors"
+                        disabled={deletingId === document.documentId}
+                        title="Delete"
+                    >
+                        <Trash2 className="h-5 w-5" />
+                    </button>
+                )
             },
         },
     ]
@@ -148,6 +183,8 @@ export default function AdminDocumentsPage() {
                                             width:
                                                 header.column.id === "fileName" || header.column.id === "teacherEmail"
                                                     ? "20%"
+                                                    : header.column.id === "actions"
+                                                    ? "10%"
                                                     : "15%",
                                         }}
                                     >

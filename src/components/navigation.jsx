@@ -57,7 +57,7 @@ const Navigation = () => {
         role === "admin"
             ? [
                   { icon: <Home size={18} />, text: "Home", href: "/" },
-                  { icon: <FileText size={18} />, text: "Add New Doc (Old)", href: "/documents" },
+                  //   { icon: <FileText size={18} />, text: "Add New Doc (Old)", href: "/documents" },
                   { icon: <FileText size={18} />, text: "Assign Doc", href: "/assign" },
                   { icon: <PenLine size={18} />, text: "Evaluation", href: "/evaluation" },
                   { icon: <List size={18} />, text: "Exam list", href: "/exams-list" },
@@ -70,7 +70,7 @@ const Navigation = () => {
                   { icon: <LogOut size={18} />, text: "Sign out", onClick: handleLogout },
               ]
             : [
-                  { icon: <FileText size={18} />, text: "Teacher Docs", href: "/teacher-documents" },
+                  //   { icon: <FileText size={18} />, text: "Teacher Docs", href: "/teacher-documents" },
                   { icon: <FileText size={18} />, text: " Doc", href: "/documents" },
                   { icon: <PenLine size={18} />, text: "Evaluation", href: "/evaluation" },
                   { icon: <User size={18} />, text: "Profile", href: "/profile" },

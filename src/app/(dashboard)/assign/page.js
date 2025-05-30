@@ -35,7 +35,10 @@ export default function AssignPage() {
                 department: data.department,
                 subject: data.subject,
                 teacher: data.teacher,
-                onReset: () => setStepData({ department: null, subject: null, teacher: null, upload: null }),
+                onReset: () => {
+                    setStepIdx(0)
+                    setStepData({ department: null, subject: null, teacher: null, upload: null })
+                },
             }),
         },
     ]

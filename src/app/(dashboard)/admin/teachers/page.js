@@ -67,7 +67,7 @@ export default function TeachersManagementPage() {
                 teacherData.password = formData.password
             }
 
-            const response = await fetch("/api/teachers", {
+            const response = await fetch("/api/teachers/teachers-data", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -128,7 +128,7 @@ export default function TeachersManagementPage() {
 
     const updatePassword = async (teacherId, newPassword) => {
         try {
-            const response = await fetch(`/api/teachers/${teacherId}/password`, {
+            const response = await fetch(`/api/teachers/teachers-data/${teacherId}/password`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",

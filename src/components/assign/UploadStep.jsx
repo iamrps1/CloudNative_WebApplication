@@ -32,7 +32,6 @@ export default function UploadStep({ department, subject, teacher, onReset }) {
             formData.append("subjectId", subject.id)
             formData.append("subject", subject.name)
             formData.append("teacherId", teacher.id)
-            console.log(subject)
 
             // Use XMLHttpRequest for progress
             const xhr = new XMLHttpRequest()
