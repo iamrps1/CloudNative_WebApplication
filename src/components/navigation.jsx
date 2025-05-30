@@ -72,7 +72,7 @@ const Navigation = () => {
             : [
                   //   { icon: <FileText size={18} />, text: "Teacher Docs", href: "/teacher-documents" },
                   { icon: <FileText size={18} />, text: " Doc", href: "/documents" },
-                  { icon: <PenLine size={18} />, text: "Evaluation", href: "/evaluation" },
+                  //   { icon: <PenLine size={18} />, text: "Evaluation", href: "/evaluation" },
                   { icon: <User size={18} />, text: "Profile", href: "/profile" },
                   { icon: <FileQuestion size={18} />, text: "FAQs", href: "/support" },
                   { icon: <LogOut size={18} />, text: "Sign out", onClick: handleLogout },

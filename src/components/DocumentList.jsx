@@ -4,7 +4,7 @@ import { useState } from "react"
 import { FileText, Eye } from "lucide-react"
 
 import { toast } from "sonner"
-import PdfViewer from "./PdfViewer"
+import EvaluatorView from "./EvaluatorView"
 
 export default function DocumentList({ documents }) {
     const [viewingDoc, setViewingDoc] = useState(null)
@@ -67,7 +67,13 @@ export default function DocumentList({ documents }) {
                 ))}
             </div>
 
-            {viewingDoc && <PdfViewer url={viewingDoc.url} onClose={() => setViewingDoc(null)} />}
+            {viewingDoc && (
+                <EvaluatorView
+                    pdfUrl={viewingDoc.url}
+                    originalS3Key={viewingDoc.s3Key}
+                    onClose={() => setViewingDoc(null)}
+                />
+            )}
         </>
     )
 }
