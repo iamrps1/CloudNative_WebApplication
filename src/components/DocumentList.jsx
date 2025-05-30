@@ -13,6 +13,7 @@ export default function DocumentList({ documents, loading, onDocumentDelete }) {
 
     const handleView = async (document) => {
         try {
+            console.log(document)
             setLoadingUrl(true)
             const response = await fetch(`/api/documents/signed-url?key=${encodeURIComponent(document.s3Key)}`)
             if (!response.ok) {

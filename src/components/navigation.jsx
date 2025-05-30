@@ -57,7 +57,8 @@ const Navigation = () => {
         role === "admin"
             ? [
                   { icon: <Home size={18} />, text: "Home", href: "/" },
-                  { icon: <FileText size={18} />, text: "Add New Doc", href: "/documents" },
+                  { icon: <FileText size={18} />, text: "Add New Doc (Old)", href: "/documents" },
+                  { icon: <FileText size={18} />, text: "Assign Doc", href: "/assign" },
                   { icon: <PenLine size={18} />, text: "Evaluation", href: "/evaluation" },
                   { icon: <List size={18} />, text: "Exam list", href: "/exams-list" },
                   //   { icon: <Eye size={18} />, text: "Monitoring", href: "/results" },

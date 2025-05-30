@@ -1,5 +1,6 @@
 import { PutCommand, QueryCommand, GetCommand, DeleteCommand, ScanCommand } from "@aws-sdk/lib-dynamodb"
-import { dynamoDb, TABLES } from "../aws-config"
+import { dynamoDb, TABLES, s3Client, BUCKET_NAME } from "../aws-config"
+import { DeleteObjectCommand } from "@aws-sdk/client-s3"
 
 // DynamoDB schema for documents:
 // Primary Key: PK (teacherId), SK (documentId)
@@ -89,6 +90,27 @@ export async function getDocument(teacherId, documentId) {
 }
 
 export async function deleteDocument(teacherId, documentId) {
+    console.log("delete", teacherId, documentId)
+    // 1. Get the document to find the S3 key
+    // const doc = await getDocument(teacherId, documentId)
+    if (!doc) throw new Error("Document not found")
+
+    // 2. Delete from S3
+    if (doc.s3Key) {
+        try {
+            await s3Client.send(
+                new DeleteObjectCommand({
+                    Bucket: BUCKET_NAME,
+                    Key: doc.s3Key,
+                })
+            )
+        } catch (err) {
+            console.error("Error deleting from S3:", err)
+            // Optionally, throw or continue
+        }
+    }
+
+    // 3. Delete from DynamoDB
     const params = {
         TableName: TABLES.DOCUMENTS,
         Key: {
@@ -98,6 +120,7 @@ export async function deleteDocument(teacherId, documentId) {
     }
 
     try {
+        console.log("Class")
         await dynamoDb.send(new DeleteCommand(params))
         return true
     } catch (error) {

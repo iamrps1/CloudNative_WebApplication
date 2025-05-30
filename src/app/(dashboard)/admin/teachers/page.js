@@ -31,7 +31,7 @@ export default function TeachersManagementPage() {
 
     const loadTeachers = async () => {
         try {
-            const response = await fetch("/api/teachers")
+            const response = await fetch("/api/teachers/teachers-data")
             const data = await response.json()
             setTeachers(data)
         } catch (error) {
