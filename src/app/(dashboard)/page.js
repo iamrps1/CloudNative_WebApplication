@@ -2,7 +2,7 @@
 
 import { DashboardCard } from "@/components/ui/cards"
 import { cn } from "@/lib/utils"
-import { Home, FileText, PenLine, User, FileQuestion, List } from "lucide-react"
+import { FileText, PenLine, User, Users, FileQuestion, List } from "lucide-react"
 import config from "../../../config"
 import { useSession } from "next-auth/react"
 
@@ -33,6 +33,15 @@ const quickLinks = [
         bgColor: "bg-violet-500",
         description: "Check and evaluate assigned documents (for teachers).",
         adminOnly: false,
+    },
+    {
+        id: 6,
+        name: "Teachers",
+        href: "/admin/teachers",
+        icon: <Users size={40} />,
+        bgColor: "bg-green-500",
+        description: "Manage teachers and their subjects",
+        adminOnly: true,
     },
     {
         id: 4,
@@ -69,7 +78,7 @@ const MainDashboard = () => {
             <div className="my-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {quickLinks
                     .filter((link) => {
-                        if (isAdmin) return link.name !== "Document Management"
+                        if (isAdmin) return link.name !== "Document Management" && link.name !== "Evaluation"
                         return link.name !== "Assign Docs"
                     })
                     .map((link) => (

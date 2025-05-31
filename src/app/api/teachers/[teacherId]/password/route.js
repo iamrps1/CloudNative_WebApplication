@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server"
 import { getServerSession } from "next-auth"
-import { authOptions } from "@/lib/auth"
+import { authOptions } from "../../../auth/[...nextauth]/route"
 import { updateTeacherPassword } from "@/lib/db/teachers"
 
 export async function PUT(request, { params }) {
