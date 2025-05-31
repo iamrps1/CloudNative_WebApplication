@@ -79,7 +79,8 @@ const MainDashboard = () => {
                 {quickLinks
                     .filter((link) => {
                         if (isAdmin) return link.name !== "Document Management" && link.name !== "Evaluation"
-                        return link.name !== "Assign Docs"
+                        // return link.name !== "Assign Docs"
+                        return link.adminOnly === isAdmin
                     })
                     .map((link) => (
                         <a key={link.id} href={link.href} className="block">
